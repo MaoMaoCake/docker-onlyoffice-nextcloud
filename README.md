@@ -2,6 +2,9 @@
 
 Document Server (distributed as ONLYOFFICE Docs starting from v.6.0) and Nextcloud Docker installation will install the preconfigured version of [ONLYOFFICE Document Server][2] connected to Nextcloud to your server running them in Docker containers.
 
+## Know Issue
+When creating the first admin account nginx can report a 504 gateway timeout,
+this is fine just wait for a few moments and try to login by going to [http://localhost/index.php/login](http://localhost/index.php/login)
 
 ## Requirements
 

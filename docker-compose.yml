@@ -9,6 +9,13 @@ services:
       - '9000'
     volumes:
       - app_data:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=nextcloud
+      - MYSQL_HOST=nextcloud-database
   onlyoffice-document-server:
     container_name: onlyoffice-document-server
     image: onlyoffice/documentserver:latest
@@ -26,9 +33,24 @@ services:
     ports:
       - 80:80
       - 443:443
+    depends_on:
+      - app
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - app_data:/var/www/html
+  db:
+    container_name: nextcloud-database
+    image: mariadb
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_PASSWORD=nextcloud
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+    expose:
+      - '3306'
 volumes:
   document_data:
   document_log:
