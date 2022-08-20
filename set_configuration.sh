@@ -21,3 +21,6 @@ docker exec -u www-data nextcloud-app-server php occ --no-warnings app:install o
 docker exec -u www-data nextcloud-app-server php occ --no-warnings config:system:set onlyoffice DocumentServerUrl --value="/ds-vpath/"
 docker exec -u www-data nextcloud-app-server php occ --no-warnings config:system:set onlyoffice DocumentServerInternalUrl --value="http://nextcloud-onlyoffice-document-server/"
 docker exec -u www-data nextcloud-app-server php occ --no-warnings config:system:set onlyoffice StorageUrl --value="http://nextcloud-nginx-server/"
+
+# force the system to use https
+docker exec -u www-data nextcloud-app-server php occ --no-warnings config:system:set overwriteprotocol --value=https
